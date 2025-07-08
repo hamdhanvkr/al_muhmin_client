@@ -1,29 +1,31 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUsers, faUser, faHandHoldingHeart, faGear, faRightFromBracket, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 function SideBar({ isClose }) {
 
+	const {username} =useParams()
+	
 	const sidemenus = [
 		{
 			name: 'Dashboard',
-			path: '/layout/dashboard',
+			path: `/layout/${username}/dashboard`,
 			icon: faHome,
 		},
 		{
 			name: 'Member Details',
-			path: '/layout/memberdetails',
+			path: `/layout/${username}/memberdetails`,
 			icon: faUsers,
 		},
 		{
 			name: 'Distribution Details',
-			path: '/layout/distributiondetails',
+			path: `/layout/${username}/distributiondetails`,
 			icon: faHandHoldingHeart,
 		},
 		{
 			name: 'Setting',
-			path: '/layout/setting',
+			path: `/layout/${username}/setting`,
 			icon: faGear,
 		},
 		{

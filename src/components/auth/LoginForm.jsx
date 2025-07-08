@@ -3,13 +3,45 @@ import Photos from '../../assets/TRUST LOGO.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function LoginForm() {
+
+	const apiUrl = import.meta.env.VITE_API_URL;
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
+	const [error, setError] = useState('');
+
 	const navigate = useNavigate();
+
+	const handleLogin = async () => {
+
+		if (!username || !password) {
+			alert("Please Filled the Username And Password");
+			return
+		}
+		try {
+			const response = await axios.post(`${apiUrl}/api/login`, {
+				username: username,
+				password: password
+			});
+			console.log(username, password);
+
+			if (response.data.success) {
+				navigate(`layout/${username}/`)
+			}
+
+			else {
+				setError(response.data.message) || 'Login Failed'
+				console.log(error);
+			}
+		}
+		catch (err) {
+			console.error(err);
+		}
+	}
 
 	return (
 		<div className="bg-gradient-to-br from-green-700 to-emerald-500 min-h-screen flex flex-col justify-center items-center px-4 sm:px-8">
@@ -23,7 +55,7 @@ function LoginForm() {
 
 			<div className="bg-white w-full max-w-md mt-8 rounded-2xl shadow-xl p-8 flex flex-col gap-6">
 				<h1 className="font-bold text-xl text-green-700 text-center">Login to Your Account</h1>
-
+				{error && <p className='text-red-400'>{error}</p>}
 				<div className="relative">
 					<FontAwesomeIcon icon={faUser} className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
 					<input
@@ -34,7 +66,6 @@ function LoginForm() {
 						className="w-full pl-10 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-400 focus:outline-none text-gray-700 placeholder:text-sm"
 					/>
 				</div>
-
 				<div className="relative">
 					<FontAwesomeIcon icon={faLock} className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
 					<input
@@ -45,9 +76,8 @@ function LoginForm() {
 						className="w-full pl-10 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-400 focus:outline-none text-gray-700 placeholder:text-sm"
 					/>
 				</div>
-
 				<button
-					onClick={() => navigate('/layout/dashboard')}
+					onClick={handleLogin}
 					className="w-full py-2 rounded-lg bg-green-700 hover:bg-emerald-600 transition text-white font-semibold text-lg shadow-md flex items-center justify-center gap-2"
 				>
 					<FontAwesomeIcon icon={faArrowRightToBracket} />
