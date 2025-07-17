@@ -30,7 +30,7 @@ function LoginForm() {
 			console.log(username, password);
 
 			if (response.data.success) {
-				navigate(`layout/${username}/`)
+				navigate(`layout/${username}/dashboard`)
 			}
 
 			else {
