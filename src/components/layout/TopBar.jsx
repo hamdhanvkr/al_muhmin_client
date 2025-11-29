@@ -3,76 +3,43 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 
-function TopBar({onOpen}) {
+function TopBar({ onOpen }) {
 
-const navigate  = useNavigate();
+	const navigate = useNavigate();
 
-const handleLogout =()=>{
-	// alert("ARE YOU SURE WANT TO LOGOUT")
-	navigate('/');
-};
+	const handleLogout = () => { navigate('/')};
 
-  return (
-	<div className='py-2 px-4 flex items-center justify-between bg-gradient-to-r from-green-500 via-emerald-700 to-lime-600 shadow-lg backdrop-blur-sm rounded-b-md'>
-			<button onClick={onOpen} className='p-2 rounded hover:bg-white/20 transition duration-200'>
-				<FontAwesomeIcon icon={faBars} color='white' size='lg' />
+	return (
+		<header className='py-3 px-6 flex items-center justify-between bg-slate-800 shadow-xl'>
+
+			{/* Left Section: Menu Toggle */}
+			<button
+				onClick={onOpen}
+			// Set the base text color to slate-300 so the icon is visible
+
+			>
+
+				<FontAwesomeIcon icon={faBars} size='xl' color='white' />
 			</button>
-			<marquee className='text-white font-bold text-xl tracking-wide drop-shadow-sm'>
-				AL MUHMIN ISLAMIC TRUST
-			</marquee>
-			<button className='p-2 rounded hover:bg-white/20 transition duration-200'>
-				<FontAwesomeIcon icon={faRightFromBracket} onClick={handleLogout} color='white' size='lg' />
+
+			{/* Center Section: Static App Title */}
+			<div className='flex-1 flex justify-center'>
+				<h1 className='text-slate-100 font-extrabold text-xl tracking-wider'>
+					AL MUHMIN ISLAMIC TRUST
+				</h1>
+			</div>
+
+			{/* Right Section: Logout Button */}
+			<button
+				onClick={handleLogout}
+				className='p-2 rounded transition duration-200 text-red-400 hover:text-white hover:bg-red-600'
+				aria-label="Logout"
+			>
+				{/* This icon is visible because the container text class is set to text-red-400 */}
+				<FontAwesomeIcon icon={faRightFromBracket} size='xl' />
 			</button>
-		</div>
-  )
+		</header>
+	);
 }
 
-export default TopBar
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react'
-// import { Menu, LogOut } from 'lucide-react'
-
-// const TopBar = ({ onOpen }) => {
-// 	return (
-// 		<div className='py-2 px-4 flex items-center justify-between 
-// 			bg-gradient-to-r from-green-500 via-emerald-600 to-lime-900 
-// 			shadow-lg backdrop-blur-sm rounded-b-md'>
-			
-// 			<button
-// 				onClick={onOpen}
-// 				className='p-2 rounded hover:bg-white/20 transition duration-200'
-// 			>
-// 				<Menu color='white' size={24} />
-// 			</button>
-
-// 			<label className='text-white font-bold text-xl tracking-wide drop-shadow-sm'>
-// 				Home
-// 			</label>
-
-// 			<button className='p-2 rounded hover:bg-white/20 transition duration-200'>
-// 				<LogOut color='white' size={22} />
-// 			</button>
-// 		</div>
-// 	)
-// }
-
-// export default TopBar
+export default TopBar;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Photos from '../../assets/TRUST LOGO.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
@@ -27,10 +27,10 @@ function LoginForm() {
 				username: username,
 				password: password
 			});
-			console.log(username, password);
+			// console.log(username, password);
 
 			if (response.data.success) {
-				navigate(`layout/${username}/dashboard`)
+				navigate(`/layout/${username}/dashboard`)
 			}
 
 			else {
@@ -41,6 +41,10 @@ function LoginForm() {
 		catch (err) {
 			console.error(err);
 		}
+	}
+
+	const handleRegister = () => {
+		navigate('/register')
 	}
 
 	return (
@@ -83,6 +87,22 @@ function LoginForm() {
 					<FontAwesomeIcon icon={faArrowRightToBracket} />
 					Login
 				</button>
+				<div className='flex items-center gap-2'>
+					<p className="text-sm text-gray-600 text-center">
+						Don’t have an account?
+					</p>
+					<p onClick={handleRegister} className="text-blue-600 hover:underline">
+						Please Sign up
+					</p>
+				</div>
+
+				{/* <button
+					onClick={handleRegister}
+					className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-500 transition text-white font-semibold text-lg shadow-md flex items-center justify-center gap-2"
+				>
+					<FontAwesomeIcon icon={faUser} />
+					Sign Up
+				</button> */}
 			</div>
 		</div>
 	);

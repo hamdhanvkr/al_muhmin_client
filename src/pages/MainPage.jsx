@@ -33,7 +33,7 @@ function MainPage() {
                     <a href='' className='font-bold text-lg hover:underline'>Contact</a>
                     <a href='' className='font-bold text-lg hover:underline'>Services</a>
                     <button onClick={handlenavigate}
-                        className='bg-blue-700 h-16 p-5 font-bold text-lg rounded-lg mr-5 hover:bg-blue-600 text-white cursor-pointer'>Donate</button>
+                        className='bg-blue-700 h-16 p-4 font-bold text-lg rounded-lg mr-5 hover:bg-blue-600 text-white cursor-pointer'>Login</button>
                 </div>
             </div>
             <div className='w-full h-[700px] overflow-hidden'>

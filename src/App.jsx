@@ -7,6 +7,8 @@ import DistributionDetails from './pages/DistributionDetails';
 import Setting from './pages/Setting';
 import Dashboard from './pages/Dashboard';
 import MainPages from './pages/MainPage'
+import Register from './pages/Resgister'
+import AmountEntry from './pages/AmountEntry';
 
 const App = () => {
 
@@ -14,9 +16,11 @@ const App = () => {
 		<Routes>
 			<Route path='/' element={<MainPages />} />
 			<Route path='/login' element={<Login />} />
+			<Route path='/register' element={<Register />} />
 			<Route path='/layout/:username' element={<OverLayout />} >
 				<Route path='dashboard' element={<Dashboard />} />
 				<Route path='memberdetails' element={<MemberDetails />} />
+				<Route path='amountentry' element={<AmountEntry />} />
 				<Route path='distributiondetails' element={<DistributionDetails />} />
 				<Route path='setting' element={<Setting />} />
 			</Route>
