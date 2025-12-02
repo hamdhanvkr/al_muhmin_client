@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Outlet, NavLink, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faHome, faUsers, faUser, faGear,
+    faHome, faUsers, faUser, faGear, faBars,
     faRightFromBracket, faXmark, faDollarSign, faChartBar
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -93,23 +94,51 @@ function SideBar({ isClose }) {
 function OverLayout() {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        navigate('/');
+    };
 
     return (
         <div className="flex">
-            {isSidebarOpen && (
-                <SideBar isClose={() => setIsSidebarOpen(false)} />
-            )}
-            <div className="flex-1">
-                <button
-                    className="p-3 m-3 text-white rounded-lg bg-slate-800 lg:hidden"
-                    onClick={() => setIsSidebarOpen(true)}
-                >
-                    Open Menu
-                </button>
-                <Outlet />
+
+            {/* Sidebar */}
+            {isSidebarOpen && <SideBar isClose={() => setIsSidebarOpen(false)} />}
+
+            {/* Main content */}
+            <div className="flex flex-col flex-1">
+                {/* Topbar */}
+                <header className='flex items-center justify-between px-6 py-3 shadow-xl bg-slate-800'>
+                    {/* Left Section: Menu Toggle */}
+                    <button onClick={() => setIsSidebarOpen(true)}>
+                        <FontAwesomeIcon icon={faBars} size='xl' color='white' />
+                    </button>
+
+                    {/* Center Section: Static App Title */}
+                    <div className='flex justify-center flex-1'>
+                        <h1 className='text-sm font-bold tracking-wider text-slate-100 lg:text-2xl'>
+                            AL MUHMIN ISLAMIC TRUST
+                        </h1>
+                    </div>
+
+                    {/* Right Section: Logout Button */}
+                    <button
+                        onClick={handleLogout}
+                        className='p-2 text-white transition duration-200 rounded'
+                        aria-label="Logout"
+                    >
+                        <FontAwesomeIcon icon={faRightFromBracket} size='xl' />
+                    </button>
+                </header>
+
+                {/* Content */}
+                <div className="flex-1 p-4">
+                    <Outlet />
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default OverLayout;
