@@ -6,6 +6,8 @@ import DistributionDetails from './pages/DistributionDetails';
 import Dashboard from './pages/Dashboard';
 import HomePage from './pages/HomePage'
 import AmountEntry from './pages/AmountEntry';
+import AcademicManage from './pages/AcademicManage';
+import UserManage from './pages/UserManage';
 
 const App = () => {
 
@@ -17,6 +19,8 @@ const App = () => {
                 <Route path='memberDetails' element={<MemberDetails />} />
                 <Route path='amountEntry' element={<AmountEntry />} />
                 <Route path='distributionDetails' element={<DistributionDetails />} />
+                <Route path='academicManage' element={<AcademicManage />} />
+                <Route path='userManage' element={<UserManage />} />
             </Route>
         </Routes>
     )
