@@ -21,8 +21,18 @@ function SideBar({ isClose }) {
     const utilitymenus = [
         { name: 'Academic Management', path: `/layout/${username}/academicManage`, icon: faGear },
         { name: 'User Management', path: `/layout/${username}/userManage`, icon: faGear },
-        { name: 'Logout', path: '/', icon: faRightFromBracket }
     ];
+
+    
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+
+        navigate('/');
+    };
+
 
     return (
         <div className="fixed top-0 left-0 z-30 h-full px-4 py-6 text-white transition-transform duration-300 shadow-xl w-68 bg-slate-800">
@@ -86,6 +96,13 @@ function SideBar({ isClose }) {
                         <span>{menu.name}</span>
                     </NavLink>
                 ))}
+                <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-3 px-3 py-2 mt-3 text-sm font-medium text-red-400 transition rounded-lg hover:bg-slate-700 hover:text-red-400"
+                >
+                    <FontAwesomeIcon icon={faRightFromBracket} className="w-4 h-4" />
+                    <span>Logout</span>
+                </button>
             </div>
         </div>
     );
@@ -94,11 +111,6 @@ function SideBar({ isClose }) {
 function OverLayout() {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        navigate('/');
-    };
 
     return (
         <div className="flex">
@@ -122,14 +134,7 @@ function OverLayout() {
                         </h1>
                     </div>
 
-                    {/* Right Section: Logout Button */}
-                    <button
-                        onClick={handleLogout}
-                        className='p-2 text-white transition duration-200 rounded'
-                        aria-label="Logout"
-                    >
-                        <FontAwesomeIcon icon={faRightFromBracket} size='xl' />
-                    </button>
+
                 </header>
 
                 {/* Content */}

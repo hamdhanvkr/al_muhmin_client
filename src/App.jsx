@@ -8,13 +8,22 @@ import HomePage from './pages/HomePage'
 import AmountEntry from './pages/AmountEntry';
 import AcademicManage from './pages/AcademicManage';
 import UserManage from './pages/UserManage';
+import Auth from './components/ProtectedRoute/Auth';
 
 const App = () => {
 
     return (
         <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/layout/:username/*' element={<OverLayout />} >
+
+            <Route
+                path='/layout/:username/*'
+                element={
+                    <Auth>
+                        <OverLayout />
+                    </Auth>
+                }
+            >
                 <Route path='dashboard' element={<Dashboard />} />
                 <Route path='memberDetails' element={<MemberDetails />} />
                 <Route path='amountEntry' element={<AmountEntry />} />

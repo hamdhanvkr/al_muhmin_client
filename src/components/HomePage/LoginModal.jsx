@@ -39,6 +39,17 @@ function LoginModal({ isOpen, onClose }) {
             });
 
             if (response.data.success) {
+
+                // const { username, role } = response.data.data;
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("username", username);
+                // localStorage.setItem("role", response.data.data.role);
+                // localStorage.setItem("isLoggedIn", "true");
+
+                // sessionStorage.setItem("username", username);
+                // sessionStorage.setItem("role", role);
+                // sessionStorage.setItem("isLoggedIn", "true");
+
                 showMessage('success', 'Login successful! Redirecting...');
                 setTimeout(() => navigate(`/layout/${username}/dashboard`), 500);
             } else {
